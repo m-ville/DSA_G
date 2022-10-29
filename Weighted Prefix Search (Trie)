@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+#define MAX 1000
+using namespace std;
+
+int maxWeight(char str[MAX][MAX], int weight[],
+						int n, char prefix[])
+{
+	int ans = -1;
+	bool check;
+
+	for (int i = 0; i < n; i++)
+	{
+		check = true;
+
+		for (int j=0, k=0; j < strlen(str[i]) &&
+						k < strlen(prefix); j++, k++)
+		{
+			if (str[i][j] != prefix[k])
+			{
+				check = false;
+				break;
+			}
+		}
+
+		if (check)
+			ans = max(ans, weight[i]);
+	}
+
+	return ans;
+}
+
+int main()
+{
+	int n = 3;
+	char str[3][MAX] = { "geeks", "geeksfor", "geeksforgeeks" };
+	int weight[] = {15, 30, 45};
+	char prefix[] = "geek";
+
+	cout << maxWeight(str, weight, n, prefix) << endl;
+
+	return 0;
+}
